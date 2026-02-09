@@ -8,6 +8,7 @@ import com.backend.backend.model.repositories.UserRepo;
 import com.backend.backend.services.interfaces.UserService;
 import com.backend.backend.web.dtos.answer.UserDTO;
 import com.backend.backend.web.dtos.request.UserCreateDTO;
+import com.backend.backend.web.dtos.request.UserLoginDTO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -30,6 +31,24 @@ public class UserServiceImpl implements  UserService {
 
         return modelMapper.map(createdUser, UserDTO.class);
     }
+
+    @Override
+    public  UserDTO login(UserLoginDTO userLoginDTO){
+
+        User userTologin = modelMapper.map(userLoginDTO, User.class);
+
+        User foundUser = userRepo.findByEmail(userTologin.getEmail())
+            .orElseThrow(() -> new RuntimeException("The email does not exist"));
+
+        if(!foundUser.getPassword().equals(userTologin.getPassword())){
+            throw new RuntimeException("Incorrect password");
+        }
+
+        return modelMapper.map(foundUser, UserDTO.class);
+        
+    }
+
+
 
     @Override
     public UserDTO updateUsername(Long userId, String newUsername){

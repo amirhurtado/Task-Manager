@@ -1,5 +1,7 @@
 package com.backend.backend.model.repositories;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,5 +11,6 @@ import com.backend.backend.model.entities.User;
 public interface UserRepo extends JpaRepository<User, Long>{
 
     Boolean existsByEmail(String email);
+    Optional<User> findByEmail(String email);
     
 }
