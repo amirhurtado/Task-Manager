@@ -19,6 +19,7 @@ import com.backend.backend.model.entities.User;
 import com.backend.backend.model.repositories.UserRepo;
 import com.backend.backend.web.dtos.answer.UserDTO;
 import com.backend.backend.web.dtos.request.UserCreateDTO;
+import com.backend.backend.web.dtos.request.UserUpdateDTO;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -69,7 +70,8 @@ public class UserServiceImplTest {
 
         when(userRepo.findById(1L)).thenReturn(Optional.of(user));
         
-        UserDTO result = userService.updateUsername(1L, "New Name");
+        UserUpdateDTO userUpdateDTO = new UserUpdateDTO("New Name");
+        UserDTO result = userService.updateUsername(1L, userUpdateDTO);
 
         assertEquals("New Name", result.getName());
     }
