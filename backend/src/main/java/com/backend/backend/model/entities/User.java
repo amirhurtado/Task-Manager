@@ -1,5 +1,6 @@
 package com.backend.backend.model.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -30,6 +31,6 @@ public class User {
 
 
     @OneToMany(mappedBy="user")
-    private List<Task> tasks;
+    private List<Task> tasks = new ArrayList<>();
     
 }
