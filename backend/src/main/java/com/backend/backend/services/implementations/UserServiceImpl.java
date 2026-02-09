@@ -9,6 +9,7 @@ import com.backend.backend.services.interfaces.UserService;
 import com.backend.backend.web.dtos.answer.UserDTO;
 import com.backend.backend.web.dtos.request.UserCreateDTO;
 import com.backend.backend.web.dtos.request.UserLoginDTO;
+import com.backend.backend.web.dtos.request.UserUpdateDTO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -51,12 +52,12 @@ public class UserServiceImpl implements  UserService {
 
 
     @Override
-    public UserDTO updateUsername(Long userId, String newUsername){
+    public UserDTO updateUsername(Long userId, UserUpdateDTO userUpdateDTO){
 
         User userToUpdate = userRepo.findById(userId)
             .orElseThrow(() -> new RuntimeException("User not found"));
 
-            userToUpdate.setName(newUsername);
+            userToUpdate.setName(userUpdateDTO.getNewUsername());
             userRepo.save(userToUpdate);
 
             return modelMapper.map(userToUpdate, UserDTO.class);
