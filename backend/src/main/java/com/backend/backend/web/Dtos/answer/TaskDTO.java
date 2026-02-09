@@ -1,4 +1,4 @@
-package com.backend.backend.web.Dtos.answer;
+package com.backend.backend.web.dtos.answer;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
