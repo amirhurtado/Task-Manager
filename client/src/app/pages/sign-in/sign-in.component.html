@@ -1,0 +1,36 @@
+<div class="sign-in">
+  <div class="form-group">
+    <fa-icon [icon]="lockIcon" size="1x" class="lock-icon" ></fa-icon>
+    <h1>Iniciar sesión</h1>
+
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+    <form [formGroup]="loginForm" class="form-content" (ngSubmit)="onSubmit()">
+      <div class="section">
+        <label for="email" class="label">Email</label>
+        <input
+          type="email"
+          formControlName="email"
+          id="email"
+          placeholder="Email"
+          class="input"
+        />
+        <small *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="small_error">Email inválido</small>
+      </div>
+
+      <div class="section">
+        <label for="password" class="label">Contraseña</label>
+        <input
+          type="password"
+          formControlName="password"
+          id="password"
+          placeholder="Contraseña"
+          class="input"
+        />
+        <small *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="small_error">La contraseña es requerida</small>
+      </div>
+
+      <button [disabled]="loginForm.invalid" type="submit" class="submit-button">Iniciar sesión</button>
+    </form>
+  </div>
+</div>
