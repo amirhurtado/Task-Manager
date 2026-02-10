@@ -9,10 +9,19 @@ export class UserService {
 
   private apiUrl = 'http://localhost:8080/api/user'; 
 
-  constructor(private http: HttpClient) { }
+  private userData : any = null;
 
+  constructor(private http: HttpClient) { }
 
   logIn(loginDataForm: any) : Observable<any>{
     return this.http.post(`${this.apiUrl}/login`, loginDataForm);
+  }
+
+  setUserData(userData: any){
+    this.userData = userData;
+  }
+
+  getUserData(){
+    return this.userData;
   }
 }
