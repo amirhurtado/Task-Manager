@@ -4,7 +4,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -28,7 +27,7 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<UserDTO> createUser(@RequestBody UserCreateDTO userCreateDTO) {
 
         UserDTO userDTO = userService.createUser(userCreateDTO);
@@ -36,7 +35,7 @@ public class UserController {
         return new ResponseEntity<>(userDTO, HttpStatus.CREATED);        
     }
 
-    @GetMapping
+    @PostMapping("/login")
     public  ResponseEntity<UserDTO> login(@RequestBody UserLoginDTO userLoginDTO) {
         
         UserDTO userDTO = userService.login(userLoginDTO);
