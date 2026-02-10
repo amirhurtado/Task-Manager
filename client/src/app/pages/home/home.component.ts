@@ -14,7 +14,11 @@ export class HomeComponent implements OnInit {
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
-    this.dataUser = this.userService.getUserData();
+    
+
+    this.userService.user$.subscribe(userData => {
+      this.dataUser = userData;
+    })
 
     if(!this.dataUser) {
       this.router.navigate(['/']);

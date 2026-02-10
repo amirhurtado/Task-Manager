@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,12 @@ export class UserService {
 
   private apiUrl = 'http://localhost:8080/api/user'; 
 
-  private userData : any = null;
+  private userSubject = new BehaviorSubject<any>(null)
+
+  public user$ = this.userSubject.asObservable();
+
+
+  
 
   constructor(private http: HttpClient) { }
 
@@ -18,10 +24,6 @@ export class UserService {
   }
 
   setUserData(userData: any){
-    this.userData = userData;
-  }
-
-  getUserData(){
-    return this.userData;
+    this.userSubject.next(userData);
   }
 }
